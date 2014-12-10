@@ -1,4 +1,4 @@
-п»їunit 
+unit 
 	Collecting_Spores_Quest;
 
 interface
@@ -7,38 +7,92 @@ uses 	SysUtils, Classes;
 const 
 	QuestItemId = 1118;
 	
-	//РЅРёРє РґСЂР°Р№РІРµСЂР°
+	QuestId = 313;
+	
+	//ник драйвера
 	PmUserName = '';
 	
-	//РРјСЏ РєРІРµСЃС‚РѕРІРѕРіРѕ РќРџР¦
-	QuestNpcName = 'Р“РµСЂР±РёСЌР»СЊ'
+	//Имя квестового НПЦ
+	QuestNpcName = 'Гербиэль';
 	
-	//РѕС‚РїСЂР°РІР»СЏС‚СЊ Р»Рё СЃРѕРѕР±С‰РµРЅРёСЏ РІ Р»РёС‡РєСѓ РґСЂР°Р№РІРµСЂСѓ
+	//отправлять ли сообщения в личку драйверу
 	ShouldPmToDriver = true;
 
 implementation
 
-procedure RandomDelay(min: integer, max: integer);
+procedure RandomDelay(min: integer; max: integer);
 begin
 	Delay(min + Random(max-min));
 end;
 
 procedure MoveToStartAfterRespawn;
 begin
-	begin
-		if(User.InRange(45398, 49703, -3064, 50)) then begin
+	if(User.InRange(45398, 49703, -3064, 50)) then begin
 		Engine.MoveTo(45573, 50199, -3056);  
 	end;
 	if(User.InRange(45516, 49563, -3064, 50)) then begin
 		Engine.MoveTo(45762, 49575, -3056);
 	end;
+	Engine.MoveTo(44760, 49809, -3056);
+    Engine.MoveTo(43888, 50160, -3056);
+    Engine.MoveTo(43494, 50260, -2992);
+    Engine.MoveTo(43019, 50034, -2984);
+    Engine.MoveTo(42834, 50058, -2976);
 end;
 
-procedure PmToDriver(str: string);
+procedure PmToDriver(str: String);
 begin
 	if(ShouldPmToDriver = true) then begin
 		Engine.Say(str, 2, PmUserName);
 	end;
+end;
+
+procedure TakeQuest;
+begin
+	Engine.SetTarget(QuestNpcName);
+	Engine.DlgOpen();
+	Engine.DlgSel(3);
+	RandomDelay(500, 1500);
+	Engine.DlgSel(1);
+	RandomDelay(500, 1500);
+	Engine.DlgSel(1);
+	RandomDelay(500, 1500);
+end;
+
+procedure EndQuest;
+begin
+	Engine.SetTarget(QuestNpcName);
+	Engine.DlgOpen();
+	RandomDelay(500, 1500);
+	Engine.DlgSel(3);
+	RandomDelay(500, 1500);
+end;
+
+procedure MoveToSpot;
+begin
+	Engine.MoveTo(42900, 50504, -2984);
+	Engine.MoveTo(42907, 50803, -2992);
+	Engine.MoveTo(42833, 51338, -2992);
+	Engine.MoveTo(40913, 52643, -3168);
+	Engine.MoveTo(40532, 53795, -3296);
+	Engine.MoveTo(40072, 56215, -3632);
+	Engine.MoveTo(39826, 57414, -3608);
+	Engine.MoveTo(39460, 58752, -3632);
+	Engine.MoveTo(38163, 59535, -3568);
+end;
+
+procedure MoveHome;
+begin
+	Engine.MoveTo(38163, 59535, -3568);
+	Engine.MoveTo(39460, 58752, -3632);    
+	Engine.MoveTo(39826, 57414, -3608);
+	Engine.MoveTo(40072, 56215, -3632);
+	Engine.MoveTo(40532, 53795, -3296);
+	Engine.MoveTo(40913, 52643, -3168);
+	Engine.MoveTo(42833, 51338, -2992);
+	Engine.MoveTo(42907, 50803, -2992);
+	Engine.MoveTo(42900, 50504, -2984);
+	Engine.MoveTo(42834, 50058, -2976);
 end;
 
 procedure ExecuteCollectingSporesQuest;
@@ -48,77 +102,54 @@ var
 	tempStr:string;
 	lastsporecount:Integer;
 begin
-   Randomize();
-   PmToDriver('РќР°С‡РёРЅР°СЋ РєРІРµСЃС‚');
-   if User.InRange(44760,49809,-3056,1500,100) then begin
-    Engine.MoveTo(44760, 49809, -3056);
-    Engine.MoveTo(43888, 50160, -3056);
-    Engine.MoveTo(43494, 50260, -2992);
-    Engine.MoveTo(43019, 50034, -2984);
-    Engine.MoveTo(42834, 50058, -2976);
-  end;
-  PmToDriver('Р‘РµСЂСѓ РєРІРµСЃС‚');
-  Engine.SetTarget(QuestNpcName);
-  Engine.DlgOpen();
-  Engine.DlgSel(3);
+while 1=1 do begin
+	if(User.Dead) then begin
+		Engine.GoHome;
+		while not User.InRange(44914, 49768, -3056, 3000, 300) do  //проверяем в городе ли мы, если нет задержка и так зацикливаем
+			Delay(10000);
+		MoveToStartAfterRespawn; // идем в магазин
+	end;
+	
+	if(not User.InRange(44914, 49768, -3056, 3000, 300)) then //if we are not in town and alive, soe to town
+	begin
+		//todo:unstick
+	end;
+	
+	if(not User.InRange(42834, 50058, -2976, 50)) then begin //if we are not near NPC then move to
+		MoveToStartAfterRespawn;
+	end;
+	
+	if( (Inventory.Quest.ByID(QuestItemId, item) = false) and (item.count = 10) ) then begin
+		EndQuest;
+	end;
+	
+	if(not Engine.QuestStatus(QuestId, 1)) then begin //quest taken
+		TakeQuest;
+	end;
+	PmToDriver('Иду качатся');
+	MoveToSpot;
+	RandomDelay(500, 1500);
   
-  RandomDelay(500, 1500);
+	PmToDriver('Начинаю кач');
+	Engine.FaceControl(0, true);
+	
+	//зацикливаем проверку на наличие квест итема
+	while( (Inventory.Quest.ByID(QuestItemId, item) = false) or (item.count < 10)) do begin
+		if(lastsporecount <> item.count) then begin
+			tempStr:= 'Мешочков со спорами осталось: ' + IntToStr(10 - item.count);
+			PmToDriver(tempStr);      
+		end;
   
-  Engine.DlgSel(1);
+	lastsporecount:= item.count;
+	end;  
+	RandomDelay(500, 1000);
   
-  RandomDelay(500, 1500);
-  
-  Engine.DlgSel(1);
-  
-  RandomDelay(500, 1500);
-  
-  PmToDriver('РРґСѓ РєР°С‡Р°С‚СЃСЏ');
-  Engine.MoveTo(42900, 50504, -2984);
-  Engine.MoveTo(42907, 50803, -2992);
-  Engine.MoveTo(42833, 51338, -2992);
-  Engine.MoveTo(40913, 52643, -3168);
-  Engine.MoveTo(40532, 53795, -3296);
-  Engine.MoveTo(40072, 56215, -3632);
-  Engine.MoveTo(39826, 57414, -3608);
-  Engine.MoveTo(39460, 58752, -3632);
-  Engine.MoveTo(38163, 59535, -3568);
-  
-  RandomDelay(500, 1500);
-  
-  PmToDriver('РќР°С‡РёРЅР°СЋ РєР°С‡');
-  Engine.FaceControl(0, true);
-  //Р·Р°С†РёРєР»РёРІР°РµРј РїСЂРѕРІРµСЂРєСѓ РЅР° РЅР°Р»РёС‡РёРµ РєРІРµСЃС‚ РёС‚РµРјР°
-  while( (Inventory.Quest.ByID(QuestItemId, item) = false) or (item.count < 10)) do begin
-    if(lastsporecount <> item.count) then begin
-        tempStr:= 'РњРµС€РѕС‡РєРѕРІ СЃРѕ СЃРїРѕСЂР°РјРё РѕСЃС‚Р°Р»РѕСЃСЊ: ' + IntToStr(10 - item.count);
-        PmToDriver(tempStr);      
-    end;
-    lastsporecount:= item.count;
-    
-    Delay(500);
-  if (User.Dead)
-  end;
-  Engine.FaceControl(0, false);
-  PmToDriver('РќРµСЃСѓ СЃРґР°РІР°С‚СЊ');
-  Engine.MoveTo(38163, 59535, -3568);
-  Engine.MoveTo(39460, 58752, -3632);    
-  Engine.MoveTo(39826, 57414, -3608);
-  Engine.MoveTo(40072, 56215, -3632);
-  Engine.MoveTo(40532, 53795, -3296);
-  Engine.MoveTo(40913, 52643, -3168);
-  Engine.MoveTo(42833, 51338, -2992);
-  Engine.MoveTo(42907, 50803, -2992);
-  Engine.MoveTo(42900, 50504, -2984);
-  Engine.MoveTo(42834, 50058, -2976);
-  Engine.SetTarget(QuestNpcName);
-  Engine.DlgOpen();
-  
-  RandomDelay(500, 1500);
-  
-  Engine.DlgSel(3);
-  
-  RandomDelay(500, 1500);
-
+	Engine.FaceControl(0, false);
+	MoveHome();
+	PmToDriver('Несу сдавать');
+	EndQuest;
+	Delay(10000);
+end;
 end;
 
 begin
