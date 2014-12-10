@@ -18,6 +18,11 @@ const
 
 implementation
 
+procedure RandomDelay(min: integer, max: integer);
+begin
+	Delay(min + Random(max-min));
+end;
+
 procedure MoveToStartAfterRespawn;
 begin
 	begin
@@ -43,7 +48,8 @@ var
 	tempStr:string;
 	lastsporecount:Integer;
 begin
-	PmToDriver('Начинаю квест');
+   Randomize();
+   PmToDriver('Начинаю квест');
    if User.InRange(44760,49809,-3056,1500,100) then begin
     Engine.MoveTo(44760, 49809, -3056);
     Engine.MoveTo(43888, 50160, -3056);
@@ -55,11 +61,17 @@ begin
   Engine.SetTarget(QuestNpcName);
   Engine.DlgOpen();
   Engine.DlgSel(3);
-  delay(900);
+  
+  RandomDelay(500, 1500);
+  
   Engine.DlgSel(1);
-  delay(1004);
+  
+  RandomDelay(500, 1500);
+  
   Engine.DlgSel(1);
-  delay(3000);
+  
+  RandomDelay(500, 1500);
+  
   PmToDriver('Иду качатся');
   Engine.MoveTo(42900, 50504, -2984);
   Engine.MoveTo(42907, 50803, -2992);
@@ -70,7 +82,9 @@ begin
   Engine.MoveTo(39826, 57414, -3608);
   Engine.MoveTo(39460, 58752, -3632);
   Engine.MoveTo(38163, 59535, -3568);
-  delay(1000); 
+  
+  RandomDelay(500, 1500);
+  
   PmToDriver('Начинаю кач');
   Engine.FaceControl(0, true);
   //зацикливаем проверку на наличие квест итема
@@ -80,9 +94,9 @@ begin
         PmToDriver(tempStr);      
     end;
     lastsporecount:= item.count;
-    delay(1000);
-	if (User.Dead)
-	
+    
+    Delay(500);
+  if (User.Dead)
   end;
   Engine.FaceControl(0, false);
   PmToDriver('Несу сдавать');
@@ -98,9 +112,13 @@ begin
   Engine.MoveTo(42834, 50058, -2976);
   Engine.SetTarget(QuestNpcName);
   Engine.DlgOpen();
-  delay(450);
+  
+  RandomDelay(500, 1500);
+  
   Engine.DlgSel(3);
-  delay(900);
+  
+  RandomDelay(500, 1500);
+
 end;
 
 begin
