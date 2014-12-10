@@ -10,6 +10,9 @@ const
 	//ник драйвера
 	PmUserName = '';
 	
+	//Имя квестового НПЦ
+	QuestNpcName = 'Гербиэль'
+	
 	//отправлять ли сообщения в личку драйверу
 	ShouldPmToDriver = true;
 
@@ -49,7 +52,7 @@ begin
     Engine.MoveTo(42834, 50058, -2976);
   end;
   PmToDriver('Беру квест');
-  Engine.SetTarget('Гербиэль');
+  Engine.SetTarget(QuestNpcName);
   Engine.DlgOpen();
   Engine.DlgSel(3);
   delay(900);
@@ -93,7 +96,7 @@ begin
   Engine.MoveTo(42907, 50803, -2992);
   Engine.MoveTo(42900, 50504, -2984);
   Engine.MoveTo(42834, 50058, -2976);
-  Engine.SetTarget('Гербиэль');
+  Engine.SetTarget(QuestNpcName);
   Engine.DlgOpen();
   delay(450);
   Engine.DlgSel(3);
