@@ -121,7 +121,7 @@ while 1=1 do begin
 	end;
 	
 	
-	if(not User.InRange(42834, 50058, -2976, 50)) then begin //if we are not near NPC then move to
+	if(not User.InRange(42834, 50058, -2976, 100)) then begin //if we are not near NPC then move to
 		MoveToStartAfterRespawn;
 	end;
 	
@@ -151,9 +151,13 @@ while 1=1 do begin
 	RandomDelay(500, 1000);
   
 	Engine.FaceControl(0, false);
-	MoveHome();
+	
 	PmToDriver('Несу сдавать');
+	
+	MoveHome();
+	
 	EndQuest;
+	
 	Delay(10000);
 end;
 end;
