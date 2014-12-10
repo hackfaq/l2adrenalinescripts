@@ -83,6 +83,7 @@ end;
 
 procedure MoveHome;
 begin
+	Engine.MoveTo(37060, 60967, -3584);
 	Engine.MoveTo(38163, 59535, -3568);
 	Engine.MoveTo(39460, 58752, -3632);    
 	Engine.MoveTo(39826, 57414, -3608);
@@ -110,10 +111,15 @@ while 1=1 do begin
 		MoveToStartAfterRespawn; // идем в магазин
 	end;
 	
+	if(User.InRange(37060, 60967, -3584,5000)) then begin
+		MoveHome;
+	end;
+	
 	if(not User.InRange(44914, 49768, -3056, 3000, 300)) then //if we are not in town and alive, soe to town
 	begin
 		//todo:unstick
 	end;
+	
 	
 	if(not User.InRange(42834, 50058, -2976, 50)) then begin //if we are not near NPC then move to
 		MoveToStartAfterRespawn;
