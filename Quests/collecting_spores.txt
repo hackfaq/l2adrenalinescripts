@@ -40,7 +40,7 @@ procedure ExecuteCollectingSporesQuest;
 var 
 	index: Integer;
 	item:TL2Item;
-	ids:string;
+	tempStr:string;
 	lastsporecount:Integer;
 begin
 	PmToDriver('Начинаю квест');
@@ -76,8 +76,8 @@ begin
   //зацикливаем проверку на наличие квест итема
   while( (Inventory.Quest.ByID(QuestItemId, item) = false) or (item.count < 10)) do begin
     if(lastsporecount <> item.count) then begin
-        ids:= 'Мешочков со спорами осталось: ' + IntToStr(10 - item.count);
-        PmToDriver(ids);      
+        tempStr:= 'Мешочков со спорами осталось: ' + IntToStr(10 - item.count);
+        PmToDriver(tempStr);      
     end;
     lastsporecount:= item.count;
     delay(1000);
