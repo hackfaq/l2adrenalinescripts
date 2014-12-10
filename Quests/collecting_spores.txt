@@ -1,0 +1,105 @@
+﻿unit 
+	Collecting_Spores_Quest;
+
+interface
+
+uses 	SysUtils, Classes;
+const 
+	QuestItemId = 1118;
+	
+	//ник драйвера
+	PmUserName = '';
+	
+	//отправлять ли сообщения в личку драйверу
+	ShouldPmToDriver = true;
+
+implementation
+
+procedure MoveToStartAfterRespawn;
+begin
+	begin
+		if(User.InRange(45398, 49703, -3064, 50)) then begin
+		Engine.MoveTo(45573, 50199, -3056);  
+	end;
+	if(User.InRange(45516, 49563, -3064, 50)) then begin
+		Engine.MoveTo(45762, 49575, -3056);
+	end;
+end;
+
+procedure PmToDriver(str: string);
+begin
+	if(ShouldPmToDriver = true) then begin
+		Engine.Say(str, 2, PmUserName);
+	end;
+end;
+
+procedure ExecuteCollectingSporesQuest;
+var 
+	index: Integer;
+	item:TL2Item;
+	ids:string;
+	lastsporecount:Integer;
+begin
+	PmToDriver('Начинаю квест');
+   if User.InRange(44760,49809,-3056,1500,100) then begin
+    Engine.MoveTo(44760, 49809, -3056);
+    Engine.MoveTo(43888, 50160, -3056);
+    Engine.MoveTo(43494, 50260, -2992);
+    Engine.MoveTo(43019, 50034, -2984);
+    Engine.MoveTo(42834, 50058, -2976);
+  end;
+  PmToDriver('Беру квест');
+  Engine.SetTarget('Гербиэль');
+  Engine.DlgOpen();
+  Engine.DlgSel(3);
+  delay(900);
+  Engine.DlgSel(1);
+  delay(1004);
+  Engine.DlgSel(1);
+  delay(3000);
+  PmToDriver('Иду качатся');
+  Engine.MoveTo(42900, 50504, -2984);
+  Engine.MoveTo(42907, 50803, -2992);
+  Engine.MoveTo(42833, 51338, -2992);
+  Engine.MoveTo(40913, 52643, -3168);
+  Engine.MoveTo(40532, 53795, -3296);
+  Engine.MoveTo(40072, 56215, -3632);
+  Engine.MoveTo(39826, 57414, -3608);
+  Engine.MoveTo(39460, 58752, -3632);
+  Engine.MoveTo(38163, 59535, -3568);
+  delay(1000); 
+  PmToDriver('Начинаю кач');
+  Engine.FaceControl(0, true);
+  //зацикливаем проверку на наличие квест итема
+  while( (Inventory.Quest.ByID(QuestItemId, item) = false) or (item.count < 10)) do begin
+    if(lastsporecount <> item.count) then begin
+        ids:= 'Мешочков со спорами осталось: ' + IntToStr(10 - item.count);
+        PmToDriver(ids);      
+    end;
+    lastsporecount:= item.count;
+    delay(1000);
+	if (User.Dead)
+	
+  end;
+  Engine.FaceControl(0, false);
+  PmToDriver('Несу сдавать');
+  Engine.MoveTo(38163, 59535, -3568);
+  Engine.MoveTo(39460, 58752, -3632);    
+  Engine.MoveTo(39826, 57414, -3608);
+  Engine.MoveTo(40072, 56215, -3632);
+  Engine.MoveTo(40532, 53795, -3296);
+  Engine.MoveTo(40913, 52643, -3168);
+  Engine.MoveTo(42833, 51338, -2992);
+  Engine.MoveTo(42907, 50803, -2992);
+  Engine.MoveTo(42900, 50504, -2984);
+  Engine.MoveTo(42834, 50058, -2976);
+  Engine.SetTarget('Гербиэль');
+  Engine.DlgOpen();
+  delay(450);
+  Engine.DlgSel(3);
+  delay(900);
+end;
+
+begin
+	ExecuteCollectingSporesQuest();
+end.
