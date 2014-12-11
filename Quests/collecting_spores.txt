@@ -103,7 +103,7 @@ var
 	tempStr:string;
 	lastsporecount:Integer;
 begin
-while 1=1 do begin
+
 	if(User.Dead) then begin
 		Engine.GoHome;
 		while not User.InRange(44914, 49768, -3056, 3000, 300) do  //проверяем в городе ли мы, если нет задержка и так зацикливаем
@@ -147,6 +147,10 @@ while 1=1 do begin
 		end;
   
 	lastsporecount:= item.count;
+	
+		if(User.Dead) then begin
+			exit;
+		end;
 	end;  
 	RandomDelay(500, 1000);
   
@@ -160,8 +164,9 @@ while 1=1 do begin
 	
 	Delay(10000);
 end;
-end;
 
 begin
+while 1=1 do begin
 	ExecuteCollectingSporesQuest();
+end;
 end.
