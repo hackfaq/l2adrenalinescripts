@@ -169,7 +169,7 @@ begin
 end;
 
 begin
-while ( (1=1) (and deathCounts < 5) ) do begin
+while ( (1=1) and (deathCounts < 5) ) do begin
 	ExecuteCollectingSporesQuest();
 end;
 end.
