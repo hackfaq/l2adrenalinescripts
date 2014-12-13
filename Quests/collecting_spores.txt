@@ -106,7 +106,7 @@ var
 	lastsporecount:Integer;
 begin
 
-	if(User.Dead) then begin
+	if(User.Dead and (deathCounts < 5)) then begin
 		Engine.GoHome;
 		deathCounts := deathCounts+1;
 		while not User.InRange(44914, 49768, -3056, 3000, 300) do  //проверяем в городе ли мы, если нет задержка и так зацикливаем
@@ -169,7 +169,7 @@ begin
 end;
 
 begin
-while ( (1=1) (and deathCounts < 5) ) do begin
+while ( (1=1) and (deathCounts < 5) ) do begin
 	ExecuteCollectingSporesQuest();
 end;
 end.
