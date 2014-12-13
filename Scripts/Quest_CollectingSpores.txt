@@ -105,8 +105,7 @@ var
 	tempStr:string;
 	lastsporecount:Integer;
 begin
-
-	if(User.Dead) then begin
+	if(User.Dead and (deathCounts < 5)) then begin
 		Engine.FaceControl(0, false);
 		Engine.GoHome;
 		deathCounts := deathCounts+1;
