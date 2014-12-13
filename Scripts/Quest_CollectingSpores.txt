@@ -107,6 +107,7 @@ var
 begin
 
 	if(User.Dead) then begin
+		Engine.FaceControl(0, false);
 		Engine.GoHome;
 		deathCounts := deathCounts+1;
 		while not User.InRange(44914, 49768, -3056, 3000, 300) do  //проверяем в городе ли мы, если нет задержка и так зацикливаем
