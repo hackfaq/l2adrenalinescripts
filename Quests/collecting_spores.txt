@@ -20,6 +20,8 @@ const
 
 implementation
 
+var deathCounts:Integer;
+
 procedure RandomDelay(min: integer; max: integer);
 begin
 	Delay(min + Random(max-min));
@@ -106,6 +108,7 @@ begin
 
 	if(User.Dead) then begin
 		Engine.GoHome;
+		deathCounts := deathCounts+1;
 		while not User.InRange(44914, 49768, -3056, 3000, 300) do  //проверяем в городе ли мы, если нет задержка и так зацикливаем
 			Delay(10000);
 		MoveToStartAfterRespawn; // идем в магазин
@@ -166,7 +169,7 @@ begin
 end;
 
 begin
-while 1=1 do begin
+while ( (1=1) (and deathCounts < 5) ) do begin
 	ExecuteCollectingSporesQuest();
 end;
 end.
