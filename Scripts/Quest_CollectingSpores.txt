@@ -143,7 +143,6 @@ begin
   if(not User.InRange(42825, 50065, -2976, 100, 100)) then
   begin	
   	Print('Going to start point');
-    Delay(99999);
   	RespPoint_ElvenVillage.MoveToStartPoint;
   	Print('Arrived to start point');
   	Print('Going to quest NPC');
