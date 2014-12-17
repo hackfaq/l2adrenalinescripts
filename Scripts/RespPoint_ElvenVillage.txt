@@ -1,0 +1,18 @@
+unit 
+	RespPoint_ElvenVillage;
+
+interface
+
+uses 	SysUtils, Classes;	
+implementation
+
+procedure MoveToStartPoint();
+begin
+	if User.inrange(45409, 49673, -3064, 3550, 3550) then begin
+		Engine.MoveTo(46049, 50000, -3064);   
+	end;
+end;
+
+begin
+  
+end.

@@ -3,7 +3,7 @@ unit
 
 interface
 
-uses 	SysUtils, Classes;
+uses 	SysUtils, Classes, RespPoint_ElvenVillage, Utils;
 const 
 	QuestItemId = 1118;
 	
@@ -18,84 +18,101 @@ const
 	//отправл€ть ли сообщени€ в личку драйверу
 	ShouldPmToDriver = true;
 
+	//максимальное количество смертей 
+	MaxDeathsCount = 5;
+
 implementation
 
-var deathCounts:Integer;
-
-procedure RandomDelay(min: integer; max: integer);
-begin
-	Delay(min + Random(max-min));
-end;
-
-procedure MoveToStartAfterRespawn;
-begin
-	if(User.InRange(45398, 49703, -3064, 50)) then begin
-		Engine.MoveTo(45573, 50199, -3056);  
-	end;
-	if(User.InRange(45516, 49563, -3064, 50)) then begin
-		Engine.MoveTo(45762, 49575, -3056);
-	end;
-	Engine.MoveTo(44760, 49809, -3056);
-    Engine.MoveTo(43888, 50160, -3056);
-    Engine.MoveTo(43494, 50260, -2992);
-    Engine.MoveTo(43019, 50034, -2984);
-    Engine.MoveTo(42834, 50058, -2976);
-end;
-
-procedure PmToDriver(str: String);
-begin
-	if(ShouldPmToDriver = true) then begin
-		Engine.Say(str, 2, PmUserName);
-	end;
-end;
+var deathCounts: Integer;
 
 procedure TakeQuest;
 begin
 	Engine.SetTarget(QuestNpcName);
+	Utils.RandomDelay(300, 500);
 	Engine.DlgOpen();
+	Utils.RandomDelay(300, 500);
 	Engine.DlgSel(3);
-	RandomDelay(500, 1500);
+	Utils.RandomDelay(500, 1500);
 	Engine.DlgSel(1);
-	RandomDelay(500, 1500);
+	Utils.RandomDelay(500, 1500);
 	Engine.DlgSel(1);
-	RandomDelay(500, 1500);
+	Utils.RandomDelay(500, 1500);
 end;
 
 procedure EndQuest;
 begin
 	Engine.SetTarget(QuestNpcName);
+	Utils.RandomDelay(300, 500);
 	Engine.DlgOpen();
-	RandomDelay(500, 1500);
+	Utils.RandomDelay(500, 1500);
 	Engine.DlgSel(3);
-	RandomDelay(500, 1500);
+	Utils.RandomDelay(500, 1500);
 end;
 
 procedure MoveToSpot;
 begin
-	Engine.MoveTo(42900, 50504, -2984);
-	Engine.MoveTo(42907, 50803, -2992);
-	Engine.MoveTo(42833, 51338, -2992);
-	Engine.MoveTo(40913, 52643, -3168);
-	Engine.MoveTo(40532, 53795, -3296);
-	Engine.MoveTo(40072, 56215, -3632);
-	Engine.MoveTo(39826, 57414, -3608);
-	Engine.MoveTo(39460, 58752, -3632);
-	Engine.MoveTo(38163, 59535, -3568);
+  Engine.MoveTo(42914, 50649, -2984);
+  Utils.RandomDelay(300, 800);
+  Engine.MoveTo(42913, 51193, -2992);
+  Utils.RandomDelay(300, 800);  
+  Engine.MoveTo(42019, 51869, -3016);
+  Utils.RandomDelay(300, 500);
+  Engine.MoveTo(40562, 52983, -3256);
+  Utils.RandomDelay(400, 800);
+  Engine.MoveTo(40819, 53861, -3304);
+  Utils.RandomDelay(400, 800);
+  Engine.MoveTo(42024, 56669, -3648);
+  Utils.RandomDelay(400, 800);
+  Engine.MoveTo(42815, 58504, -3672);
+  Utils.RandomDelay(400, 800);
+  Engine.MoveTo(41859, 59476, -3568);
+  Utils.RandomDelay(400, 800);
+  Engine.MoveTo(39698, 60227, -3592);
+  Utils.RandomDelay(400, 800);
+  Engine.MoveTo(38537, 60272, -3552);
+  Utils.RandomDelay(400, 800);
+  Engine.MoveTo(37345, 60235, -3584);
+  Utils.RandomDelay(400, 800);  
 end;
+
+procedure MoveToNpc;
+begin
+  Engine.MoveTo(43945, 50257, -3056);
+  Utils.RandomDelay(100, 200);
+  Engine.MoveTo(43428, 50329, -2992);
+  Utils.RandomDelay(100, 200);
+  Engine.MoveTo(43031, 50033, -2984);
+  Utils.RandomDelay(100, 200);
+  Engine.MoveTo(42847, 50061, -2976);
+  Utils.RandomDelay(100, 200);	
+end;
+
 
 procedure MoveHome;
 begin
-	Engine.MoveTo(37060, 60967, -3584);
-	Engine.MoveTo(38163, 59535, -3568);
-	Engine.MoveTo(39460, 58752, -3632);    
-	Engine.MoveTo(39826, 57414, -3608);
-	Engine.MoveTo(40072, 56215, -3632);
-	Engine.MoveTo(40532, 53795, -3296);
-	Engine.MoveTo(40913, 52643, -3168);
-	Engine.MoveTo(42833, 51338, -2992);
-	Engine.MoveTo(42907, 50803, -2992);
-	Engine.MoveTo(42900, 50504, -2984);
-	Engine.MoveTo(42834, 50058, -2976);
+  Engine.MoveTo(37345, 60235, -3584);
+  Utils.RandomDelay(100, 200);
+  Engine.MoveTo(36982, 58862, -3648);
+  Utils.RandomDelay(100, 200);
+  Engine.MoveTo(36376, 56651, -3664);
+  Utils.RandomDelay(100, 200);
+  Engine.MoveTo(36155, 55622, -3536);
+  Utils.RandomDelay(100, 200);
+  Engine.MoveTo(36130, 54336, -3496);
+  Utils.RandomDelay(100, 200);
+  Engine.MoveTo(36531, 53598, -3576);
+  Utils.RandomDelay(100, 200);
+  Engine.MoveTo(38101, 53966, -3600);
+  Utils.RandomDelay(100, 200);
+  Engine.MoveTo(40703, 52809, -3224);
+  Utils.RandomDelay(100, 200);
+  Engine.MoveTo(41763, 52043, -3032);
+  Utils.RandomDelay(100, 200);
+  Engine.MoveTo(42882, 51188, -2992);
+  Utils.RandomDelay(100, 200);
+  Engine.MoveTo(42912, 50633, -2984);
+  Utils.RandomDelay(100, 200);
+  Engine.MoveTo(42847, 50061, -2976);  
 end;
 
 procedure ExecuteCollectingSporesQuest;
@@ -105,71 +122,82 @@ var
 	tempStr:string;
 	lastsporecount:Integer;
 begin
-	if(User.Dead and (deathCounts < 5)) then begin
+
+	if(User.Dead) then begin
+	  Print('Stop bot');
 		Engine.FaceControl(0, false);
+		Utils.RandomDelay(1000, 2000);
+    Print('Go to town');
 		Engine.GoHome;
-		deathCounts := deathCounts+1;
-		while not User.InRange(44914, 49768, -3056, 3000, 300) do  //провер€ем в городе ли мы, если нет задержка и так зацикливаем
+		
+		deathCounts := deathCounts + 1;
+
+		while not User.InRange(45409, 49673, -3064, 3550, 3550) do  //провер€ем в городе ли мы, если нет задержка и так зацикливаем
+		begin
+		  Print('We are not in town, so wait');
 			Delay(10000);
-		MoveToStartAfterRespawn; // идем в магазин
+		end;
 	end;
-	
-	if(User.InRange(37060, 60967, -3584,5000)) then begin
-		MoveHome;
-	end;
-	
-	if(not User.InRange(44914, 49768, -3056, 3000, 300)) then //if we are not in town and alive, soe to town
-	begin
-		//todo:unstick
-	end;
-	
-	
-	if(not User.InRange(42834, 50058, -2976, 100)) then begin //if we are not near NPC then move to
-		MoveToStartAfterRespawn;
-	end;
-	
-	if( (Inventory.Quest.ByID(QuestItemId, item) = false) and (item.count = 10) ) then begin
+
+
+  if(not User.InRange(42825, 50065, -2976, 100, 100)) then
+  begin	
+  	Print('Going to start point');
+    Delay(99999);
+  	RespPoint_ElvenVillage.MoveToStartPoint;
+  	Print('Arrived to start point');
+  	Print('Going to quest NPC');
+  	MoveToNpc;
+  	Print('Arrived to quest NPC');
+  end;
+ 
+	Utils.RandomDelay(500, 1000);
+
+	if((Inventory.Quest.ByID(QuestItemId, item) = false) and (item.count = 10) ) then begin
+	  Print('We have quest done, so end it');
 		EndQuest;
 	end;
 	
 	if(not Engine.QuestStatus(QuestId, 1)) then begin //quest taken
+	  Print('We take new quest');
 		TakeQuest;
 	end;
-	PmToDriver('»ду качатс€');
+
+  Print('MoveToSpot');
 	MoveToSpot;
-	RandomDelay(500, 1500);
+
+	Utils.RandomDelay(500, 1500);
   
-	PmToDriver('Ќачинаю кач');
+	Print('Start fight');	
 	Engine.FaceControl(0, true);
 	
 	//зацикливаем проверку на наличие квест итема
 	while( (Inventory.Quest.ByID(QuestItemId, item) = false) or (item.count < 10)) do begin
 		if(lastsporecount <> item.count) then begin
 			tempStr:= 'ћешочков со спорами осталось: ' + IntToStr(10 - item.count);
-			PmToDriver(tempStr);      
+			Print(tempStr);      
 		end;
   
-	lastsporecount:= item.count;
-	
+		lastsporecount:= item.count;	
 		if(User.Dead) then begin
+		  Engine.FaceControl(0, false);
 			exit;
 		end;
-	end;  
-	RandomDelay(500, 1000);
+	end;
+
+	Utils.RandomDelay(500, 1000);
   
 	Engine.FaceControl(0, false);
-	
-	PmToDriver('Ќесу сдавать');
-	
-	MoveHome();
-	
+
+  MoveHome;
+  
+  Utils.RandomDelay(200, 500);	
+
 	EndQuest;
-	
-	Delay(10000);
 end;
 
 begin
-while ( (1=1) and (deathCounts < 5) ) do begin
+while ( (1=1) and (deathCounts < MaxDeathsCount) ) do begin
 	ExecuteCollectingSporesQuest();
 end;
 end.

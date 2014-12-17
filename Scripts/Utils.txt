@@ -1,0 +1,16 @@
+unit 
+	Utils;
+
+interface
+
+uses 	SysUtils, Classes;	
+implementation
+
+procedure RandomDelay(min: integer; max: integer);
+begin
+	Delay(min + Random(max-min));
+end;
+
+begin
+  
+end.
