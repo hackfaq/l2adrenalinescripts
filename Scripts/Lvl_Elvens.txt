@@ -1,0 +1,68 @@
+unit 
+	Lvl_Elvens;
+
+interface
+
+uses 	SysUtils, Classes, RespPoint_ElvenVillage, Utils;
+const 
+	//максимальное количество смертей 
+	MaxDeathsCount = 5;
+
+implementation
+
+var deathCounts:Integer;
+  
+procedure FarmTill8Level;
+begin
+  MoveToSpotUpToLvl8();  
+  Engine.FaceControl(0, true);
+
+  while(User.Level < 8) do begin
+    Delay(5000);
+    if(User.Dead) then begin
+      break;
+    end;
+  end;
+  
+end;
+
+procedure MoveToSpotUpToLvl8;
+begin
+  Engine.MoveTo(47252, 50911, -2992);
+  Engine.MoveTo(47484, 51644, -2992);
+  Engine.MoveTo(49697, 53888, -3296);
+  Engine.MoveTo(52994, 53776, -3464);  
+end;
+
+begin
+while (1=1) do begin
+  if(User.Dead) then begin
+	  Print('Stop bot');
+		Engine.FaceControl(0, false);
+		Utils.RandomDelay(1000, 2000);
+    Print('Go to town');
+		Engine.GoHome;
+		
+		deathCounts := deathCounts + 1;
+
+		while not User.InRange(45409, 49673, -3064, 3550, 3550) do  //проверяем в городе ли мы, если нет задержка и так зацикливаем
+		begin
+		  Print('We are not in town, so wait');
+			Delay(10000);
+		end;
+	end;
+
+
+  if(not User.InRange(42825, 50065, -2976, 100, 100)) then
+  begin	
+  	Print('Going to start point');
+  	RespPoint_ElvenVillage.MoveToStartPoint;
+  	Print('Arrived to start point');
+  end;
+
+  if(User.Level < 8) then begin
+    FarmTill8Level;
+  end;
+Utils.RandomDelay(2000, 5000);
+end;
+end.
