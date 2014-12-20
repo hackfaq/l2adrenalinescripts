@@ -11,6 +11,15 @@ begin
 	Delay(min + Random(max-min));
 end;
 
+procedure MoveTo(x:integer; y: integer; z:integer; rnd:boolean = True; log:boolean = True);
+var
+  tempStr: String;
 begin
-  
+  tempStr := 'MoveTo (' + IntToStr(x) + ', ' + IntToStr(y) + ', ' + IntToStr(z)+ ', ' + IntToStr(z) + ');';
+  Print(tempStr);
+  Engine.MoveTo(x,y,z);
+end;
+
+begin
+
 end.

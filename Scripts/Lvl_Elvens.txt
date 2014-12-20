@@ -26,12 +26,12 @@ begin
   
 end;
 
-procedure FarmTill12Level;
+procedure FarmTill13Level;
 begin
-  MoveToSpotUpToLvl12();  
+  MoveToSpotUpToLvl13();  
   Engine.FaceControl(0, true);
 
-  while(User.Level < 12) do begin
+  while(User.Level < 13) do begin
     Delay(5000);
     if(User.Dead) then begin
       break;
@@ -40,21 +40,65 @@ begin
   
 end;
 
-procedure MoveToSpotUpToLvl8;
+procedure FarmTill15Level;
 begin
-  Engine.MoveTo(47252, 50911, -2992);
-  Engine.MoveTo(47484, 51644, -2992);
-  Engine.MoveTo(49697, 53888, -3296);
-  Engine.MoveTo(52994, 53776, -3464);  
+  MoveToSpotUpToLvl15();  
+  Engine.FaceControl(0, true);
+
+  while(User.Level < 13) do begin
+    Delay(5000);
+    if(User.Dead) then begin
+      break;
+    end;
+  end;
+  
 end;
 
-procedure MoveToSpotUpToLvl12;
+
+procedure MoveToSpotUpToLvl8;
 begin
-  Engine.MoveTo(43648, 50331, -3008);
-  Engine.MoveTo(42920, 51233, -2992);
-  Engine.MoveTo(40698, 52813, -3224);
-  Engine.MoveTo(40508, 54536, -3384);
+  Utils.MoveTo(47252, 50911, -2992);
+  Utils.MoveTo(47484, 51644, -2992);
+  Utils.MoveTo(49697, 53888, -3296);
+  Utils.MoveTo(52994, 53776, -3464);  
 end;
+
+procedure MoveToSpotUpToLvl13;
+begin
+  Utils.MoveTo(43648, 50331, -3008);
+  Utils.MoveTo(42920, 51233, -2992);
+  Utils.MoveTo(40698, 52813, -3224);
+  Utils.MoveTo(40508, 54536, -3384);
+end;
+
+procedure MoveToSpotUpToLvl15;
+begin
+  Utils.MoveTo(43912, 50246, -3056);
+  Utils.MoveTo(43376, 50463, -2992);
+  Utils.MoveTo(42915, 51267, -2992);
+  Utils.MoveTo(40479, 52924, -3256);//конец моста
+  Utils.MoveTo(40100, 53242, -3320);
+  Utils.MoveTo(38536, 53824, -3552);
+  Utils.MoveTo(37005, 53812, -3600);
+  Utils.MoveTo(33862, 52897, -3712);
+  Utils.MoveTo(31370, 51659, -3720);
+  Utils.MoveTo(29764, 51430, -3720);
+  Utils.MoveTo(27543, 53253, -3488);
+  Utils.MoveTo(26380, 53828, -3440);
+  Utils.MoveTo(24756, 54054, -3584);
+  Utils.MoveTo(23468, 54575, -3608);
+  Utils.MoveTo(24505, 56318, -3528);
+  Utils.MoveTo(25420, 57453, -3504);
+  Utils.MoveTo(26768, 58684, -3552);
+  Utils.MoveTo(28132, 60485, -3672);
+  Utils.MoveTo(29179, 62250, -2720);
+  Utils.MoveTo(29244, 62660, -3720);//на дороге
+  Utils.MoveTo(28747, 64698, -3616);
+  Utils.MoveTo(27917, 64679, -3576);
+  Utils.MoveTo(26871, 64830, -3608);
+  Utils.MoveTo(26409, 64531, -3624);
+end;
+
 
 begin
 while (1=1) do begin
@@ -75,18 +119,21 @@ while (1=1) do begin
 	end;
 
 
-  if(not User.InRange(42825, 50065, -2976, 100, 100)) then
+  if(not User.InRange(42825, 50065, -2976, 100, 100) and User.InRange(45409, 49673, -3064, 2000, 2000)) then
   begin	
   	Print('Going to start point');
   	RespPoint_ElvenVillage.MoveToStartPoint;
   	Print('Arrived to start point');
   end;
 
-  if(User.Level < 8) then begin
+  if((User.Level < 8) and User.InRange(45409, 49673, -3064, 2000, 2000)) then begin
     FarmTill8Level;
   end;
-  if(User.Level < 12) then begin
-    FarmTill12Level;
+  if((User.Level < 13) and User.InRange(45409, 49673, -3064, 2000, 2000)) then begin
+    FarmTill13Level;
+  end;
+  if((User.Level < 15) and User.InRange(45409, 49673, -3064, 2000, 2000)) then begin
+    FarmTill15Level;
   end;
 Utils.RandomDelay(2000, 5000);
 end;
