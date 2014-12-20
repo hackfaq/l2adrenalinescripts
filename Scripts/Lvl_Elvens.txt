@@ -6,7 +6,7 @@ interface
 uses 	SysUtils, Classes, RespPoint_ElvenVillage, Utils;
 const 
 	//максимальное количество смертей 
-	MaxDeathsCount = 500;
+	MaxDeathsCount = 5;
 
 implementation
 
@@ -94,9 +94,9 @@ begin
   Utils.MoveTo(29179, 62250, -2720);
   Utils.MoveTo(29244, 62660, -3720);//на дороге
   Utils.MoveTo(28747, 64698, -3616);
-  Utils.MoveTo(27917, 64679, -3576);
-  Utils.MoveTo(26871, 64830, -3608);
-  Utils.MoveTo(26409, 64531, -3624);
+  //Utils.MoveTo(27917, 64679, -3576);
+  //Utils.MoveTo(26871, 64830, -3608);
+  //Utils.MoveTo(26409, 64531, -3624);
 end;
 
 
