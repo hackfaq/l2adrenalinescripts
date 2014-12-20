@@ -40,12 +40,12 @@ begin
   
 end;
 
-procedure FarmTill15Level;
+procedure FarmTill18Level;
 begin
   MoveToSpotUpToLvl15();  
   Engine.FaceControl(0, true);
 
-  while(User.Level < 13) do begin
+  while(User.Level < 18) do begin
     Delay(5000);
     if(User.Dead) then begin
       break;
@@ -71,7 +71,7 @@ begin
   Utils.MoveTo(40508, 54536, -3384);
 end;
 
-procedure MoveToSpotUpToLvl15;
+procedure MoveToSpotUpToLvl18;
 begin
   Utils.MoveTo(43912, 50246, -3056);
   Utils.MoveTo(43376, 50463, -2992);
@@ -132,7 +132,7 @@ while (1=1) do begin
   if((User.Level < 13) and User.InRange(45409, 49673, -3064, 2000, 2000)) then begin
     FarmTill13Level;
   end;
-  if((User.Level < 15) and User.InRange(45409, 49673, -3064, 2000, 2000)) then begin
+  if((User.Level < 18) and User.InRange(45409, 49673, -3064, 2000, 2000)) then begin
     FarmTill15Level;
   end;
 Utils.RandomDelay(2000, 5000);
