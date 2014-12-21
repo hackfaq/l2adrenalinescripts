@@ -42,7 +42,7 @@ end;
 
 procedure FarmTill18Level;
 begin
-  MoveToSpotUpToLvl15();  
+  MoveToSpotUpToLvl18();  
   Engine.FaceControl(0, true);
 
   while(User.Level < 18) do begin
@@ -133,7 +133,7 @@ while (1=1) do begin
     FarmTill13Level;
   end;
   if((User.Level < 18) and User.InRange(45409, 49673, -3064, 2000, 2000)) then begin
-    FarmTill15Level;
+    FarmTill18Level;
   end;
 Utils.RandomDelay(2000, 5000);
 end;
