@@ -2,6 +2,7 @@ begin
   Engine.MoveTo(-11971, 123637, -3096);
   Engine.MoveTo(-9277, 123912, -2872);
   Engine.MoveTo(-6905, 123847, -3032);
+  Engine.MoveTo(-6898, 122385, -3032);
   Engine.MoveTo(-7556, 117833, -3336);
   Engine.MoveTo(-8512, 115806, -3280);
   Engine.MoveTo(-8034, 110891, -3184);
@@ -13,8 +14,12 @@ begin
   Engine.MoveTo(-9636, 92476, -3144);
   Engine.MoveTo(-7718, 90415, -3064);
   Engine.MoveTo(-9649, 87123, -3416);
+  Engine.MoveTo(-9765, 85876, -3528);
+  Engine.MoveTo(-9776, 84518, -3568);
   Engine.MoveTo(-9860, 80045, -3640);                
   Engine.MoveTo(-10690, 75587, -3592);
+  Engine.MoveTo(-9207, 76028, -3568);
+  Engine.MoveTo(-8152, 76413, -3528);
   Engine.MoveTo(-3307, 77329, -3552);
   Engine.MoveTo(-2263, 76684, -3344);
   Engine.MoveTo(1386, 74676, -3712);
@@ -28,8 +33,12 @@ begin
   Engine.MoveTo(14476, 55758, -3640);
   Engine.MoveTo(17208, 54822, -3704);
   Engine.MoveTo(20158, 54951, -3560);
+  Engine.MoveTo(20819, 54849, -3552);
+  Engine.MoveTo(21924, 54605, -3616);
   Engine.MoveTo(26353, 53868, -3440);
   Engine.MoveTo(30120, 51361, -3720);
+  Engine.MoveTo(31137, 51631, -3720);
+  Engine.MoveTo(32598, 52254, -3720);
   Engine.MoveTo(35936, 53502, -3600);
   Engine.MoveTo(38291, 53935, -3584);
   Engine.MoveTo(41191, 52404, -3112);
